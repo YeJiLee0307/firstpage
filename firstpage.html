@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Portfolio Floating Dots</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: white;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('mainpage.png'); /* 배경 이미지 */
+      background-size: cover;
+      background-position: center;
+    }
+
+    .dot {
+      position: absolute;
+      width: 50px; /* 점 크기를 키웠어요 (30px -> 50px) */
+      height: 50px;
+      background-color: black;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: top 2s ease-in-out, left 2s ease-in-out, transform 0.3s;
+    }
+
+    .dot:hover {
+      transform: scale(1.2); /* hover 시 1.2배로 커짐 */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="container">
+    <div class="dot" onclick="goToDetail()"></div>
+    <div class="dot" onclick="goToDetail()"></div>
+    <div class="dot" onclick="goToDetail()"></div>
+    <div class="dot" onclick="goToDetail()"></div>
+  </div>
+
+  <script>
+    function goToDetail() {
+      window.location.href = "https://yejilee0307.github.io/secondpage/secondpage.html";
+    }
+
+    function moveDots() {
+      const container = document.getElementById('container');
+      const dots = container.querySelectorAll('.dot');
+      const maxWidth = window.innerWidth - 50; // dot 크기만큼 보정 (50px)
+      const maxHeight = window.innerHeight - 50;
+
+      dots.forEach(dot => {
+        const newX = Math.random() * maxWidth;
+        const newY = Math.random() * maxHeight;
+        dot.style.left = newX + 'px';
+        dot.style.top = newY + 'px';
+      });
+    }
+
+    window.onload = () => {
+      moveDots();
+      setInterval(moveDots, 3000);
+    };
+  </script>
+
+</body>
+</html>
